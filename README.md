@@ -1,2 +1,2 @@
-#!/bin/bash
-#runs a C file through the preprocessor and save the result into another file
+Everything you need to know to start C
+
