@@ -33,6 +33,7 @@ int main(void)
 						putchar(' ');
 					}
 				}
+				t = '0';
 			}
 		}
 	}
