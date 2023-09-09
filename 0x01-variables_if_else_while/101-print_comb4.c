@@ -22,7 +22,7 @@ int main(void)
 				putchar('0' + toy);
 				putchar('0' + a);
 
-				if (box != 8 || toy != 9 || a != 10)
+				if (box != 7 || toy != 8 || a != 9)
 				{
 					putchar(',');
 					putchar(' ');
