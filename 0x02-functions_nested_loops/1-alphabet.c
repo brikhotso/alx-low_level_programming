@@ -9,7 +9,7 @@
  * Return: 0 Always (success)
  *
  */
-void print_alphabet(void);
+void print_alphabet(void)
 {
 	char c = 'a';
 
