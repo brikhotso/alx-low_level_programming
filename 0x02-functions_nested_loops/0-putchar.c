@@ -19,7 +19,7 @@ int main(void)
 		else
 			_putchar(name[count]);
 	}
-	putchar('\n');
+	_putchar('\n');
 
 	return (0);
 }
