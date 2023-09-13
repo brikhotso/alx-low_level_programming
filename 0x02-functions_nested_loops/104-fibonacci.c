@@ -12,6 +12,7 @@ int main(void)
 	int n = 98;
 	int a = 1;
 	int b = 2;
+	int i;
 
 	printf("%d, %d", a, b);
 
