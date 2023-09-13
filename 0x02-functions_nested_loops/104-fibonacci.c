@@ -9,24 +9,19 @@
  */
 int main(void)
 {
-	int counter = 2;
-	float a = 1;
-	float b = a + 1;
-	float c = a + b;
+	int n = 98;
+	int a = 1;
+	int b = 2;
 
-	printf("%.0f, ", a);
-	printf("%.0f, ", b);
-	while (counter < 98)
+	printf("%d, %d", a, b);
+
+	for (int = 2; i < n; i++)
 	{
-		counter++;
-		printf("%0.f", c);
+		int c = a + b;
+
+		printf(", %d", c);
 		a = b;
-		b = c;
-		c = a + b;
-		if (counter < 98)
-		{
-			printf(", ");
-		}
+		c = c;
 	}
 	printf("\n");
 	return (0);
