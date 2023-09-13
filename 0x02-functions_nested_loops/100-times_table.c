@@ -2,15 +2,14 @@
 
 /**
  * print_times_table - function prints the n times table, starting with 0.
+ * @n: interger to check
  *
- * Return: )0 Always (Success)
+ * Return: number matrix
  */
-void times_table(void)
+void print_times_table(int n)
 {
 	int i;
 	int j;
-	int n;
-
 	if (n <= 15 && n >= 0)
 	{
 		for (i = 0; i <= n; i++)
