@@ -9,6 +9,8 @@
  */
 int main(void)
 {
+	unsigned int n, a, b, i;
+
 	int n = 98;
 	int a = 1;
 	int b = 2;
