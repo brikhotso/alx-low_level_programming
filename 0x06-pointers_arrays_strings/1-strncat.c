@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * *_strcat - concentrates two strings
+ * _strcat - concentrates two strings
  * @dest: first string
  * @src: second string
  * @n: number of bytes used
