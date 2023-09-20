@@ -1,7 +1,7 @@
-#include <main.h>
+#include "main.h"
 
 /**
- * *_strncpy - copies a string
+ * _strncpy - copies a string
  * @dest: first string
  * @src: second string
  * @n: number of bytes used
@@ -15,6 +15,7 @@ char *_strncpy(char *dest, char *src, int n)
 	while (i < n && *(src + i))
 	{
 		*(src + i) = *(dest + i);
+		i++;
 	}
 	while (n > i)
 	{
