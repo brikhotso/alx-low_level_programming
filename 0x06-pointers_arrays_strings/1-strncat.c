@@ -1,14 +1,14 @@
 #include "main.h"
 
 /**
- * _strcat - concentrates two strings
+ * _strncat - concentrates two strings
  * @dest: first string
  * @src: second string
  * @n: number of bytes used
  *
  * Return: pointer to the resulting string
  */
-char *_strcat(char *dest, char *src, int n)
+char *_strncat(char *dest, char *src, int n)
 {
 	int i = 0, len = 0;
 
