@@ -24,7 +24,7 @@ void print_buffer(char *b, int size)
 			{
 				if (j % 2 == 0 && j != 0)
 					printf(" ");
-				if ((j + 1) > size - 1)
+				if ((i + j) > size - 1)
 				{
 					printf("  ");
 				}
@@ -36,9 +36,9 @@ void print_buffer(char *b, int size)
 			j = 0;
 			while (j < 10)
 			{
-				if ((j + 1) > size - 1)
+				if ((j + i) > size - 1)
 					break;
-				if (b[j + i] <= 31 || b[j + 1] >= '~')
+				if (b[j + i] <= 31 || b[j + i] >= '~')
 					b[j + i] = '.';
 				putchar(b[j + i]);
 				j++;
