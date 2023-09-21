@@ -21,6 +21,11 @@ int main(void)
 	{
 		c = a + b;
 
+		if (i % 10 == 0)
+			printf(",\n");
+		else
+			printf(", ");
+
 		printf(", %lu", c);
 
 		a = b;
