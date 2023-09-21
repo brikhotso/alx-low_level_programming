@@ -10,20 +10,23 @@
 int main(void)
 {
 	int n = 98;
-	int a = 1;
-	int b = 2;
+	unsigned long a = 1;
+	unsigned long b = 2;
 	int i;
 
-	printf("%d, %d", a, b);
+	printf("lu, %lu", a, b);
 
 	for (i = 2; i < n; i++)
 	{
-		int c = a + b;
+		if (i % 5 == 0)
+			printf("\n");
+		unsigned long c = a + b;
 
-		printf(", %d", c);
+		printf(", %lu", c);
 		a = b;
 		b = c;
 	}
 	printf("\n");
+
 	return (0);
 }
