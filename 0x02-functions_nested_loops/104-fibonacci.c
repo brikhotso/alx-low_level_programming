@@ -12,15 +12,16 @@ int main(void)
 	int n = 98;
 	unsigned long a = 1;
 	unsigned long b = 2;
+	unsigned long c;
 	int i;
 
-	printf("lu, %lu", a, b);
+	printf("%lu, %lu", a, b);
 
 	for (i = 2; i < n; i++)
 	{
 		if (i % 5 == 0)
 			printf("\n");
-		unsigned long c = a + b;
+		c = a + b;
 
 		printf(", %lu", c);
 		a = b;
