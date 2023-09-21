@@ -15,15 +15,14 @@ int main(void)
 	unsigned long c;
 	int i;
 
-	printf("%lu, %lu", a, b);
+	printf("1, 2");
 
 	for (i = 2; i < n; i++)
 	{
-		if (i % 5 == 0)
-			printf("\n");
 		c = a + b;
 
 		printf(", %lu", c);
+
 		a = b;
 		b = c;
 	}
