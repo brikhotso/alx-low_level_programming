@@ -11,7 +11,8 @@ int is_prime_number(int n)
 	{
 		return (0);
 	}
-	return (cal_prime(n, 2));
+	int i = 2;
+	return (cal_prime(n, i));
 }
 /**
  * cal_prime - calculate prime number
