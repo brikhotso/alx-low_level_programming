@@ -7,11 +7,15 @@
  */
 int is_prime_number(int n)
 {
+	int cal_prime(int n, int i);
+
 	if (n <= 1)
 	{
 		return (0);
 	}
+
 	int i = 2;
+
 	return (cal_prime(n, i));
 }
 /**
