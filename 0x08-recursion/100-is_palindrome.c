@@ -29,15 +29,16 @@ int _strlen_recursion(char *s)
  */
 int check_palindrome(char *s, int i, int strlen)
 {
-	if (*s == s[strlen / 2])
+	if (i >= strlen)
 	{
 		return (1);
 	}
-	if (*s == s[strlen - i - 1])
+	if (s[i] != s[strlen - i - 1])
 	{
-		return (check_palindrome(s, i + 1, strlen));
+		return (0);
 	}
-	return (0);
+	return (check_palindrome(s, i + 1, strlen));
+
 }
 
 /**
@@ -51,7 +52,7 @@ int is_palindrome(char *s)
 	int i = 0;
 	int strlen = _strlen_recursion(s);
 
-	if (!(*s))
+	if (strlen <= 1)
 	{
 		return (1);
 	}
