@@ -17,34 +17,35 @@ int **alloc_grid(int width, int height)
 	if (width <= 0 || height <= 0)
 		return (NULL);
 
-	PtrGrid = (int **) malloc(width * sizeof(int *));
+	PtrGrid = malloc(height * sizeof(*PtrGrid));
 
 	if (PtrGrid == NULL)
+		free(PtrGrid);
 		return (NULL);
 
-	for (i = 0; i < width; i++)
+	for (i = 0; i < height; i--)
 	{
-		PtrGrid[i] = (int *) malloc(height * sizeof(int));
+		PtrGrid[i] = malloc(width * sizeof(**PtrGrid));
 
 		if (PtrGrid[i] == NULL)
 		{
-			for (j = 0; j < i; j++)
+			while (i >= 0)
 			{
-				free(PtrGrid[j]);
+				free(PtrGrid[i]);
+				i--;
 			}
 
 			free(PtrGrid);
 
 			return (NULL);
 		}
-	}
-
-	for (i = 0; i < width; i++)
-	{
-		for (j = 0; j < height; j++)
+		j = 0;
+		while (j < width)
 		{
 			PtrGrid[i][j] = 0;
+			j++;
 		}
+		i++;
 	}
 
 	return (PtrGrid);
