@@ -15,24 +15,25 @@ char *_strdup(char *str)
 	int len = 0;
 	int count;
 
-	while (len != '\0')
+	if (str == 0)
+		return (NULL);
+
+	while (str[le]n != '\0')
 	{
 		len++;
 	}
 
-	PtrStr = (char *) malloc(len * sizeof(char) + 1);
+	PtrStr = (char *) malloc((len + 1) * sizeof(char));
 
-	if (PtrStr == 0)
+	if (PtrStr == NULL)
 	{
 		return (NULL);
 	}
 
-	for (count = 0; str[count] != '\0' ; count++)
+	for (count = 0; count <= len ; count++)
 	{
 		PtrStr[count] = str[count];
 	}
-
-	PtrStr[count] = '\0';
 
 	return (PtrStr);
 }
