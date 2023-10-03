@@ -11,21 +11,18 @@ int wordcount(char *s)
 {
 	int i;
 	int count = 0;
-	int in_word = 0;
 
 	for (i = 0; s[i]; i++)
 	{
-		if (s[i] != ' ' && !in_word)
+		if (s[i] == ' ')
 		{
+			if (s[i + 1] != ' ' && s[i + 1] != '\0')
+				count++;
+		}
+		else if (i == 0)
 			count++;
-			in_word = 1;
-		}
-		else if (s[i] == ' ')
-		{
-			in_word = 0;
-		}
 	}
-
+	count++;
 	return (count);
 }
 /**
@@ -41,16 +38,13 @@ char **strtow(char *str)
 
 	if (str == NULL || *str == '\0')
 		return (NULL);
-
 	count = wordcount(str);
 	if (count == 1)
 		return (NULL);
-
 	word = malloc(count * sizeof(char *));
 	if (word == NULL)
 		return (NULL);
 	word[count - 1] = NULL;
-
 	while (str[i])
 	{
 		if (str[i] != ' ' && (i == 0 || str[i - 1] == ' '))
@@ -60,7 +54,6 @@ char **strtow(char *str)
 			j++;
 			word[m] = malloc(j * sizeof(char));
 			j--;
-
 			if (word[m] == NULL)
 			{
 				for (k = 0; k < m; k++)
@@ -72,10 +65,10 @@ char **strtow(char *str)
 			for (l = 0; l < j; l++)
 				word[m][l] = str[i + l];
 			word[m][l] = '\0';
+			m++;
 			i += j;
 		}
-		else
-			i++;
+		i++;
 	}
 	return (word);
 }
