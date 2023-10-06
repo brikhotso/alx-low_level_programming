@@ -9,7 +9,7 @@
  */
 int _isdigit(char *s)
 {
-	int i;
+	int i = 0;
 
 	while (s[i])
 	{
@@ -59,7 +59,7 @@ void errors(void)
 int main(int argc, char *argv[])
 {
 	char *s1, *s2;
-	int len1, len2, len, carry, product, mul, i, j;
+	int len1, len2, len, carry, product, num1, num2, *mul, i, j;
 
 	if (argc != 3 || !_isdigit(argv[1]) || !_isdigit(argv[2]))
 		errors();
