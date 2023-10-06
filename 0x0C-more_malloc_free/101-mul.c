@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
 			mul[j] = product % 10;
 		}
 		if (carry > 0)
-			mul[len1] += carry;
+			mul[len] += carry;
 	}
 	i = 0;
 	while (mul[i] == 0 && i < len - 1)
