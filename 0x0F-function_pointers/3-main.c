@@ -1,6 +1,4 @@
 #include "3-calc.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 /**
  * main - perform simple calculation
@@ -12,7 +10,7 @@
 
 int main(int argc, char *argv[])
 {
-	int num1, num2;
+	int num1, num2, calc;
 	char *op;
 
 	if (argc != 4)
@@ -37,7 +35,9 @@ int main(int argc, char *argv[])
 		exit(100);
 	}
 
-	printf("%d\n", get_op_func(op)(num1, num2));
+	calc = get_op_func(op)(num1, num2);
+
+	printf("%d\n", calc);
 
 	return (0);
 }
