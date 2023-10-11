@@ -10,15 +10,14 @@
  */
 void print_opcodes(char *s, int n)
 {
-	int i = 0;
+	int i;
 
-	while (i < n)
+	for (i= 0; i < n; i++)
 	{
 		printf("%.2hhx", s[i]);
 
 		if (i < n - 1)
 			printf(" ");
-		i++;
 	}
 	printf("\n");
 }
@@ -30,7 +29,7 @@ void print_opcodes(char *s, int n)
  *
  * Return: 0
  */
-int main(char argc, int *argv[])
+int main(int argc, char *argv[])
 {
 	int n;
 
