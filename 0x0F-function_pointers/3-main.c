@@ -3,11 +3,11 @@
 #include <stdlib.h>
 
 /**
- * main -perform simple calculation
+ * main - perform simple calculation
  * @argc: number of passed arguments
  * @argv: pointer to array of passed argument strings
  *
- * Return: 0 always
+ * Return: 0 on sucess , else return Error and exit
  */
 
 int main(int argc, char *argv[])
