@@ -6,7 +6,7 @@
  */
 void print_b_char(va_list arg)
 {
-	putchar(va_arg(arg, int));
+	printf("%c", va_arg(arg, int));
 }
 
 /**
@@ -63,7 +63,7 @@ void print_all(const char * const format, ...)
 
 	separator = "";
 
-	while (format[i] && format)
+	while (format[i] != '\0' && format != NULL)
 	{
 		j = 0;
 
