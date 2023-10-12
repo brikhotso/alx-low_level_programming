@@ -28,7 +28,7 @@ void print_b_float(va_list arg)
 }
 
 /**
- * print_string - Prints a string
+ * print_b_string - Prints a string
  * @arg: A va_list containing the string to print
  */
 void print_b_string(va_list arg)
