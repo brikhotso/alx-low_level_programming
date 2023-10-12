@@ -24,7 +24,7 @@ void print_b_int(va_list arg)
  */
 void print_b_float(va_list arg)
 {
-	printf("%f", (float)va_arg(arg, double));
+	printf("%f", va_arg(args, double));
 }
 
 /**
@@ -38,6 +38,7 @@ void print_b_string(va_list arg)
 	if (string == NULL)
 	{
 		printf("(nil)");
+		return;
 	}
 	printf("%s", string);
 }
@@ -63,7 +64,7 @@ void print_all(const char * const format, ...)
 
 	separator = "";
 
-	while (format[i] != '\0' && format != NULL)
+	while (format != NULL && format[i] != '\0')
 	{
 		j = 0;
 
