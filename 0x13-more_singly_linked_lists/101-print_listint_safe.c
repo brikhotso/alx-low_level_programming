@@ -9,43 +9,40 @@
 size_t print_listint_safe(const listint_t *head)
 {
 	size_t node_count = 0;
-	const listint_t *slow = head, *fast = head;
+	const listint_t *current = head, *next = NULL, *check = NULL;
+	int checked = 0;
 
 	if (head == NULL)
+	{
+		exit(98);
+	}
+
+	while (current != NULL)
+	{
+		printf("[%p] %d\n", (void *)current, current->n);
+
+		next = current->next;
+		check = head;
+
+		while (check != current)
+		{
+			if (check == next)
+			{
+				checked = 1;
+				break;
+			}
+			check = check->next;
+		}
+
+		if (checked)
+			break;
+
+		current = next;
+		node_count++;
+	}
+
+	if (node_count == 0)
 		exit(98);
 
-	while (slow != NULL && fast != NULL && fast->next != NULL)
-	{
-		printf("[%p] %d\n", (void *)slow, slow->n);
-		slow = slow->next;
-		fast = fast->next->next;
-
-		if (slow == fast)
-			break;
-		node_count++;
-	}
-
-	if (slow == NULL || fast == NULL || fast->next == NULL)
-	{
-		while (slow != NULL)
-		{
-			printf("[%p] %d\n", (void *)slow, slow->n);
-			slow = slow->next;
-			node_count++;
-		}
-	}
-	else
-	{
-		printf("-> [%p] %d\n", (void *)slow, slow->n);
-		node_count++;
-		slow = slow->next;
-
-		while (slow != fast)
-		{
-			printf("[%p] %d\n", (void *)slow, slow->n);
-			slow = slow->next;
-			node_count++;
-		}
-	}
 	return (node_count);
 }
