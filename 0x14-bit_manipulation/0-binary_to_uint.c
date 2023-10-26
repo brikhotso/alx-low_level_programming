@@ -4,12 +4,15 @@
  * binary_to_uint - convert binary number to unsigned integer
  * @b: string of 1s and 0s
  *
- * Return: converted number if char is 0 or 1,else NULL
+ * Return: converted number , or 0 on error
  */
 unsigned int binary_to_uint(const char *b)
 {
 	int i, len = 0;
 	unsigned int pow2 = 1, decimal = 0;
+
+	if (b == NULL)
+		return (0);
 
 	while (b[len] != '\0')
 		len++;
