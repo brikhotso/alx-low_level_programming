@@ -34,6 +34,9 @@ ssize_t read_textfile(const char *filename, size_t letters)
 		if (fileread == 0)
 			break;
 
+		if (count + fileread > letters)
+			fileread = letters - count;
+
 		filewrite = write(STDOUT_FILENO, buffer, fileread);
 
 		if (filewrite < 0)
