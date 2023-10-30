@@ -20,25 +20,23 @@ int create_file(const char *filename, char *text_content)
 	if (openfile < 0)
 		return (-1);
 
-	while (text_content[len] != '\0')
+	if (text_content != NULL)
 	{
-		writefile = write(openfile, text_content, len);
+		while (text_content[len] != '\0')
+			len++;
 
-		if (text_content == NULL)
+		if (len > 0)
 		{
-			return (-1);
-			close(openfile);
-		}
-		if (writefile < 0)
-		{
-			return (-1);
-			close(openfile);
-		}
+			writefile = write(openfile, text_content, len);
 
-		len++;
-
-		return (1);
+			if (writefile != len)
+			{
+				close(openfile);
+				return (1);
+			}
+		}
 	}
+
 	close(openfile);
 
 	return (1);
