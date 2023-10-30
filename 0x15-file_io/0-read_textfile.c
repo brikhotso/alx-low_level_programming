@@ -18,22 +18,25 @@ ssize_t read_textfile(const char *filename, size_t letters)
 
 	fileopen = open(filename, O_RDONLY);
 
-	if (fileopen == -1)
+	if (fileopen < 0)
 		return (0);
 
 	while (count < letters)
 	{
 		fileread = read(fileopen, buffer, sizeof(buffer));
 
-		if (fileread == -1)
+		if (fileread < 0)
+		{
 			close(fileopen);
+			return (0);
+		}
 
 		if (fileread == 0)
 			break;
 
 		filewrite = write(STDOUT_FILENO, buffer, fileread);
 
-		if (filewrite == -1 )
+		if (filewrite < 0)
 		{
 			close(fileopen);
 			return (0);
