@@ -59,6 +59,7 @@ int copy_file(const char *file_from, const char *file_to)
 
 			return (-1);
 		}
+		duplicate  = open(file_to, O_WRONLY | O_APPEND);
 	}
 	free(buffer);
 	closefile(original);
