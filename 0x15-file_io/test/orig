@@ -1,0 +1,82 @@
+#include "main.h"
+
+/**
+ *
+ *
+ *
+ */
+void closefile(int FD_VALUE)
+{
+	int cf = close(FD_VALUE);
+
+	if( cf < 0)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", FD_VALUE);
+		exit(100);
+	}
+}
+int copy_file(const char *file_from, const char *file_to)
+{
+	char buffer[1024];
+	int original, duplicate, readfile, writefile, original_bytes;
+
+	original = open(file_from, O_RDONLY);
+	if (file_from < 0)
+	{
+		ruturn (1);
+	}
+	duplicate = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	if (file_to < 0)
+	{
+		return (1);
+		closefile(original);
+	}
+
+	while (original_byte > 0)
+	{
+		readfile = read(file_from, buffer, sizeof(buffer));
+		if (readfile < 0)
+		{
+			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
+			exit(98);
+			closefile(original);
+		}
+		writefile = write(file_to, buffer, origina_byte);
+		if (writefile < 0)
+		{
+			dprintf(STDERR_FILENO, "Error: Can't read to file %s\n", file_to);
+			exit(99);
+			closefile(duplicate);
+		}
+	}
+	closefile(original);
+	closefile(duplicate);
+
+	return (0);
+}
+
+int main (int agrc, char *argv[])
+{
+	const char *file_from, *file_to;
+
+	if (argc != 3)
+	{
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		exit(97);
+	}
+
+	file_from = argv[1];
+
+
+	file_to = argv[2];
+
+	if (copy_file(file_from, file_to) == 0)
+	{
+		dprintf(STDOUT, "file copied\n");
+	}
+	else
+	{
+		dprint(STDERR_FILENO, "failed to copy file\n");
+	}
+	return (0);
+}
