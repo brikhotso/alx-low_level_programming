@@ -35,16 +35,12 @@ int copy_file(const char *file_from, const char *file_to)
 		dprintf(STDERR_FILENO, "Cant write to file %s\n", file_from);
 		exit(99);
 	}
-
-
 	original = open(file_from, O_RDONLY);
-
 	if (original < 0)
 	{
 		free(buffer);
 		return (-1);
 	}
-
 	duplicate = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	if (duplicate < 0)
 	{
@@ -52,13 +48,11 @@ int copy_file(const char *file_from, const char *file_to)
 		closefile(original);
 		return (-1);
 	}
-
 	while ((original_bytes = read(original, buffer, BUFFER_SIZE)) > 0)
 	{
 		writefile = write(duplicate, buffer, original_bytes);
 		if (writefile != original_bytes)
 		{
-			dprintf(STDERR_FILENO, "Error: Can't write to file %s\n", file_to);
 			free(buffer);
 			closefile(duplicate);
 			closefile(original);
