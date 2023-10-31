@@ -1,5 +1,7 @@
 #include "main.h"
 
+void printErrorMessage(const char *message, const char *file_name);
+
 /**
  * closefile - Close file descriptor
  * @FD_VALUE: File descriptor to close
@@ -25,37 +27,29 @@ void closefile(int FD_VALUE)
  */
 int copy_file(const char *file_from, const char *file_to)
 {
-	char *buffer;
+	char buffer[1024];
 	int original, duplicate;
 	ssize_t original_bytes, writefile;
 
-	buffer = malloc(BUFFER_SIZE);
-	if (buffer == NULL)
-	{
-		dprintf(STDERR_FILENO, "Cant write to file %s\n", file_from);
-		exit(99);
-	}
 	original = open(file_from, O_RDONLY);
 	if (original < 0)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n",
-			file_from);
+		printErrorMessage("Can't read from file", file_from);
 		exit(98);
 	}
 	duplicate = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	if (duplicate < 0)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_to);
+		printErrorMessage("Can't write to", file_to);
 		closefile(original);
 		exit(99);
 	}
-	while ((original_bytes = read(original, buffer, BUFFER_SIZE)) > 0)
+	while ((original_bytes = read(original, buffer, 1024)) > 0)
 	{
 		writefile = write(duplicate, buffer, original_bytes);
 		if (writefile != original_bytes)
 		{
-			dprintf(STDERR_FILENO, "Error: Can't write to %s\n",
-				file_to);
+			printErrorMessage("Can't write to", file_to);
 			closefile(duplicate);
 			closefile(original);
 			exit(99);
@@ -63,13 +57,11 @@ int copy_file(const char *file_from, const char *file_to)
 	}
 	if (original_bytes < 0)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n",
-			file_from);
+		printErrorMessage("Can't read from file", file_from);
 		closefile(duplicate);
 		closefile(original);
 		exit(98);
 	}
-	free(buffer);
 	closefile(original);
 	closefile(duplicate);
 
@@ -118,12 +110,10 @@ int main(int argc, char *argv[])
 	{
 		if (result == -1)
 		{
-			printErrorMessage("Can't read from file", file_from);
 			exit(98);
 		}
 		else
 		{
-			printErrorMessage("Can't write to file", file_to);
 			exit(99);
 		}
 	}
