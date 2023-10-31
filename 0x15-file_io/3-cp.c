@@ -25,33 +25,48 @@ void closefile(int FD_VALUE)
  */
 int copy_file(const char *file_from, const char *file_to)
 {
-	char buffer[1024];
+	char *buffer;
 	int original, duplicate;
 	ssize_t original_bytes, writefile;
+
+	buffer = malloc(BUFFER_SIZE);
+	if (buffer == NULL)
+	{
+		dprintf(STDERR_FILENO, "Cant write to file %s\n", file_from);
+		exit(99);
+	}
+
 
 	original = open(file_from, O_RDONLY);
 
 	if (original < 0)
+	{
+		free(buffer);
 		return (-1);
+	}
 
 	duplicate = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	if (duplicate < 0)
 	{
+		free(buffer);
 		closefile(original);
 		return (-1);
 	}
 
-	while ((original_bytes = read(original, buffer, sizeof(buffer))) > 0)
+	while ((original_bytes = read(original, buffer, BUFFER_SIZE)) > 0)
 	{
 		writefile = write(duplicate, buffer, original_bytes);
 		if (writefile != original_bytes)
 		{
+			dprintf(STDERR_FILENO, "Error: Can't write to file %s\n", file_to);
+			free(buffer);
 			closefile(duplicate);
 			closefile(original);
 
 			return (-1);
 		}
 	}
+	free(buffer);
 	closefile(original);
 	closefile(duplicate);
 
