@@ -38,15 +38,15 @@ int copy_file(const char *file_from, const char *file_to)
 	original = open(file_from, O_RDONLY);
 	if (original < 0)
 	{
-		free(buffer);
-		return (-1);
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n",
+			file_from);
+		exit(98);
 	}
 	duplicate = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	if (duplicate < 0)
 	{
-		free(buffer);
-		closefile(original);
-		return (-1);
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_to);
+		exit(99);
 	}
 	while ((original_bytes = read(original, buffer, BUFFER_SIZE)) > 0)
 	{
@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
 
 	if (argc != 3)
 	{
-		printErrorMessage("Usage: cp file_from file_to", "");
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to");
 		exit(97);
 	}
 
