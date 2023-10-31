@@ -84,7 +84,7 @@ int main(int argc, char *argv[])
 	if (argc != 3)
 	{
 		printErrorMessage("Usage: cp file_from file_to", "");
-		return (1);
+		exit(97);
 	}
 
 	file_from = argv[1];
@@ -101,12 +101,12 @@ int main(int argc, char *argv[])
 		if (result == -1)
 		{
 			printErrorMessage("Can't read from file", file_from);
-			return (98);
+			exit(98);
 		}
 		else
 		{
 			printErrorMessage("Can't write to file", file_to);
-			return (99);
+			exit(99);
 		}
 	}
 }
