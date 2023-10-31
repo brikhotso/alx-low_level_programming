@@ -57,8 +57,14 @@ int copy_file(const char *file_from, const char *file_to)
 			closefile(duplicate);
 			closefile(original);
 
-			return (-1);
+			exit(99);
 		}
+	}
+	if (original_bytes < 0)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n",
+			file_from);
+		exit(98);
 	}
 	free(buffer);
 	closefile(original);
