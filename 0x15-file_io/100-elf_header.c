@@ -1,9 +1,12 @@
+#include <elf.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <elf.h>
+
 
 #define ELF_MAGIC_SIZE 16
 
