@@ -15,7 +15,7 @@ void display_abi(unsigned char *e_ident);
 void display_osabi(unsigned char *e_ident);
 void display_type(unsigned int e_type, unsigned char *e_ident);
 void display_entry(unsigned long int e_entry, unsigned char *e_ident);
-void close_elf(int elf);
+void close_elf(int fd);
 
 /**
  * check_elf - Check if file is an ELF file
@@ -263,7 +263,7 @@ int main(int argc, char *argv[])
 
 	if (readfile < 0)
 	{
-		close_fd(openfile);
+		close_elf(openfile);
 		dprintf(STDERR_FILENO, "Error: `%s`: No such file\n", argv[1]);
 		exit(98);
 	}
@@ -279,6 +279,6 @@ int main(int argc, char *argv[])
 	display_type(header.e_type, header.e_ident);
 	display_entry(header.e_entry, header.e_ident);
 
-	close_fd(openfile);
+	close_elf(openfile);
 	return (0);
 }
