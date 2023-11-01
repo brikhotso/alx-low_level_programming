@@ -210,7 +210,7 @@ void print_entry(unsigned long int e_entry, unsigned char *e_ident)
  */
 void close_elf(int elf)
 {
-    if (close(elf) == -1)
+    if (close(elf) < 0)
     {
         dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", elf);
         exit(98);
@@ -240,14 +240,14 @@ int main(int argc, char *argv[])
     }
 
     openfile = open(argv[1], O_RDONLY);
-    if (openfile == -1)
+    if (openfile < 0)
     {
         dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
         exit(98);
     }
 
     readfile = read(openfile, &header, sizeof(Elf64_Ehdr));
-    if (readfile == -1)
+    if (readfile < 0)
     {
         close_elf(openfile);
         dprintf(STDERR_FILENO, "Error: `%s`: No such file\n", argv[1]);
