@@ -25,7 +25,7 @@ void close_elf(int fd);
  */
 void check_elf(unsigned char *magic)
 {
-	int i;
+	int i = 0;
 
 	while (i < 4)
 	{
