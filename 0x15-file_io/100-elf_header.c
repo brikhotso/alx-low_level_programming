@@ -1,4 +1,3 @@
-#include <elf.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdlib.h>
@@ -6,7 +5,7 @@
 #include <string.h>
 #include <fcntl.h>
 #include <unistd.h>
-
+#include <elf.h>
 
 #define ELF_MAGIC_SIZE 16
 
@@ -27,7 +26,6 @@ int is_elf_magic(const unsigned char *magic);
 void display_magic(const unsigned char *magic) {
     int i;
 
-    printf("ELF Header:\n");
     printf("  Magic:   ");
     for (i = 0; i < ELF_MAGIC_SIZE; i++) {
         printf("%02x ", magic[i]);
@@ -136,42 +134,64 @@ int is_elf_magic(const unsigned char *magic) {
     return (magic[0] == 0x7F && magic[1] == 'E' && magic[2] == 'L' && magic[3] == 'F');
 }
 
-int main(int argc, char *argv[]) {
-    Elf64_Ehdr ehdr;
-    off_t offset = 0;
+/**
+ * check_elf - Check if the file is an ELF file
+ * @filename: The name of the file to check
+ * Return: 1 if the file is an ELF file, 0 otherwise
+ */
+int check_elf(const char *filename) {
+    unsigned char magic[ELF_MAGIC_SIZE];
     int fd;
     ssize_t n;
 
+    fd = open(filename, O_RDONLY);
+    if (fd == -1) {
+        perror("Error opening file");
+        exit(98);
+    }
+
+    n = read(fd, magic, ELF_MAGIC_SIZE);
+    if (n != ELF_MAGIC_SIZE) {
+        perror("Error reading ELF magic");
+        close(fd);
+        exit(98);
+    }
+
+    close(fd);
+
+    return is_elf_magic(magic);
+}
+
+int main(int argc, char *argv[])
+{
+	Elf64_Ehdr ehdr;
+	int fd;
+	
     if (argc != 2) {
         fprintf(stderr, "Usage: %s elf_filename\n", argv[0]);
         exit(98);
     }
 
+    if (!check_elf(argv[1])) {
+        fprintf(stderr, "Error: Not an ELF file\n");
+        exit(98);
+    }
+
     fd = open(argv[1], O_RDONLY);
     if (fd == -1) {
-        fprintf(stderr, "Error opening file\n");
+        perror("Error opening file");
         exit(98);
     }
 
-    if (lseek(fd, offset, SEEK_SET) == -1) {
-        fprintf(stderr, "Error seeking file\n");
+    if (read(fd, &ehdr, sizeof(Elf32_Ehdr)) != sizeof(Elf32_Ehdr)) {
+        perror("Error reading ELF header");
         close(fd);
         exit(98);
     }
 
-    n = read(fd, &ehdr, sizeof(Elf64_Ehdr));
-    if (n != sizeof(Elf64_Ehdr)) {
-        fprintf(stderr, "Error reading ELF header\n");
-        close(fd);
-        exit(98);
-    }
+    close(fd);
 
-    if (!is_elf_magic(ehdr.e_ident)) {
-        fprintf(stderr, "Error: Not an ELF file\n");
-        close(fd);
-        exit(98);
-    }
-
+    printf("ELF Header:\n");
     display_magic(ehdr.e_ident);
     display_class(ehdr.e_ident[EI_CLASS]);
     display_data(ehdr.e_ident[EI_DATA]);
@@ -181,6 +201,5 @@ int main(int argc, char *argv[]) {
     display_type(ehdr.e_type);
     display_entry_point(ehdr.e_entry);
 
-    close(fd);
-    return (0);
+    return 0;
 }
