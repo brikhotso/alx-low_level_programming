@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void check_elf(unsigned char *e_ident);
+void check_elf(unsigned char *magic);
 void display_magic(unsigned char *magic);
 void display_class(unsigned char *e_ident);
 void display_data(unsigned char *e_ident);
@@ -45,20 +45,19 @@ void check_elf(unsigned char *magic)
  *
  * Description: Magic numbers are separated by spaces.
  */
-void display_magic(unsigned char *e_ident)
+void display_magic(unsigned char *magic)
 {
-    int i;
-
+    int i = 0;
     printf("  Magic:   ");
 
-    for (i = 0; i < EI_NIDENT; i++)
-    {
-        printf("%02x", e_ident[i]);
+    while (magic[i] != '\0') {
+        printf("%02x", magic[i]);
 
-        if (i == EI_NIDENT - 1)
-            printf("\n");
-        else
+        if (magic[i + 1] != '\0')
             printf(" ");
+        else
+            printf("\n");
+        i++;
     }
 }
 
