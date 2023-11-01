@@ -7,8 +7,7 @@
 #include <stdlib.h>
 
 void check_elf(unsigned char *e_ident);
-void check_elf(unsigned char *e_ident);
-void display_magic(unsigned char *e_ident);
+void display_magic(unsigned char *magic);
 void display_class(unsigned char *e_ident);
 void display_data(unsigned char *e_ident);
 void display_version(unsigned char *e_ident);
@@ -24,18 +23,19 @@ void close_elf(int elf);
  *
  * Description: If the file is not an ELF file - exit code 98.
  */
-void check_elf(unsigned char *e_ident)
+void check_elf(unsigned char *magic)
 {
     int i;
 
-    for (i = 0; i < 4; i++)
+    while (i < 4)
     {
-        if (e_ident[i] != 0x7F && e_ident[i] != 'E' &&
-            e_ident[i] != 'L' && e_ident[i] != 'F')
+        if (magic[i] != 0x7F && magic[i] != 'E' &&
+            magic[i] != 'L' && magic[i] != 'F')
         {
             dprintf(STDERR_FILENO, "Error: Not an ELF file\n");
             exit(98);
         }
+	i++;
     }
 }
 
