@@ -45,18 +45,17 @@ void check_elf(unsigned char *magic)
  *
  * Description: Magic numbers are separated by spaces.
  */
-void display_magic(unsigned char *magic)
-{
+void display_magic(unsigned char *e_ident) {
     int i = 0;
     printf("  Magic:   ");
 
-    while (magic[i] != '\0') {
-        printf("%02x", magic[i]);
+    while (i < EI_NIDENT) {
+        printf("%02x", e_ident[i]);
 
-        if (magic[i + 1] != '\0')
-            printf(" ");
-        else
+        if (i == EI_NIDENT - 1)
             printf("\n");
+        else
+            printf(" ");
         i++;
     }
 }
