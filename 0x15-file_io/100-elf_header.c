@@ -10,6 +10,16 @@
 
 #define ELF_MAGIC_SIZE 16
 
+void display_magic(const unsigned char *magic);
+void display_class(const unsigned char e_ident);
+void display_data(const unsigned char e_ident);
+void display_version(const unsigned char version);
+void display_os_abi(const unsigned char osabi);
+void display_abi_version(const unsigned char abiversion);
+void display_type(const unsigned short e_type);
+void display_entry_point(const unsigned long e_entry);
+int is_elf_magic(const unsigned char *magic);
+
 /**
  * display_magic - Display the ELF magic number
  * @magic: A pointer to the ELF magic bytes
