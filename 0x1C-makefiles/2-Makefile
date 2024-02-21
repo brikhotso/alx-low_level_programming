@@ -1,0 +1,7 @@
+CC = gcc            # Compiler
+SRC = main.c school.c  # Source files
+OBJ = $(SRC:.c=.o)  # Object files
+NAME = school       # Executable name
+
+all: $(OBJ)         # 'all' rule, depends on all object files
+	$(CC) $(OBJ) -o $(NAME)
